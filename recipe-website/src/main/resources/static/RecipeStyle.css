@@ -1,3 +1,14 @@
+@font-face{
+	font-family: WesternFont;
+	src: url("daFont/Western-Bang-Bang.otf");
+}
+
+@font-face{
+	font-family: Nashville;
+	src: url("daFont/RioGrande.ttf");
+}
+
+
 html, body{
 	height: 100%;
 }
@@ -10,7 +21,8 @@ body{
 }
 
 .favoriteRecipeHeadding{
-    font-size: 50px;
+	font-family: WesternFont;
+    font-size: 60px;
     color: white;
 }
 
@@ -33,7 +45,7 @@ body{
 }
 
 .navbarGradient {
-    background-image: linear-gradient(brown, grey);
+    background-image: linear-gradient(purple, grey);
 }
 
 .outlineDiv{
@@ -54,6 +66,7 @@ body{
 }
 
 .overlay {
+	border-radius: 25px;
   position: absolute;
   bottom: 100%;
   left: 0;
@@ -63,6 +76,9 @@ body{
   width: 330px;
   height:0;
   transition: .5s ease;
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .img-divs:hover .overlay {
@@ -70,7 +86,9 @@ body{
   height: 100%;
 }
 
+
 .text {
+	font-family: Nashville;
   color: white;
   font-size: 20px;
   position: absolute;
@@ -80,4 +98,17 @@ body{
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
+}
+
+.contactParagraph{
+	font-family: Nashville;
+	color: grey;
+	font-size: 25px;
+}
+
+.roundCorner{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 25px;
 }

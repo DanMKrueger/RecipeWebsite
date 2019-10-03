@@ -38,4 +38,19 @@ public class RecipeController {
 	public @ResponseBody ArrayList<Recipe> adminRemove(@RequestBody String enteredString) throws Exception {
 		return recipeService.adminRemoveRecipe(enteredString);
 	}
+	
+	@RequestMapping(method=RequestMethod.POST, value="/editpage")
+	public @ResponseBody String editPAge(@RequestBody String enteredString) throws Exception {
+		return recipeService.adminEdit(enteredString);
+	}
+	
+	@RequestMapping(method=RequestMethod.POST, value="/editpageloaded")
+	public @ResponseBody String editPageLoaded() throws Exception {
+		return recipeService.adminEditLoaded();
+	}
+	
+	@RequestMapping(method=RequestMethod.PUT, value="/updaterecipe")
+	public String editButtonClicked(@RequestBody String enteredString) throws Exception {
+		return recipeService.updateRecipe(enteredString);
+	}
 }

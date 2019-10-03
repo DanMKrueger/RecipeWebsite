@@ -40,7 +40,7 @@ public class Recipe {
 	
 	@Override
 	public String toString() {
-		return "Recipe [Id=" + Id + ", recipe_name=" + recipe_name + ", prep_time=" + prep_time + ", image=" + image
+		return "[Id=" + Id + ", recipe_name=" + recipe_name + ", prep_time=" + prep_time + ", image=" + image
 				+ ", description=" + description + "]";
 	}
 

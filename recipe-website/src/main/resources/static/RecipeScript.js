@@ -1,3 +1,5 @@
+var myObj = 0;;
+
 function imageClicked(name, obj){
 	console.log(name);
 	if($(obj).siblings().length < 1){
@@ -20,7 +22,7 @@ function loadImages(msg){
 		divImg.setAttribute("src", msg[i].image);
 //		divImg.setAttribute("display", "inline");
 		divImg.style = "width:300px; height:300px";
-		divImg.className = "img-fluid " + "\"" + msg[i].recipe_name + "\"";	
+		divImg.className = "roundCorner img-fluid " + "\"" + msg[i].recipe_name + "\"";	
 
 		var overlayDiv = document.createElement("div");
 		overlayDiv.className="overlay";
@@ -33,7 +35,7 @@ function loadImages(msg){
 		element.appendChild(overlayDiv);
 		$('.emptyDivToPrepend').append(element);
 	}
-	
+	$('.emptyDivToPrepend').append("<video muted autoplay style=\" width:300px; height:300px\" class=\" roundCorner\"> <source src=\"rachelray.mp4\" type=\"video/mp4\"</video>");	
 }
 
 function addingRecipe(name, prep, img, descrip){
@@ -94,6 +96,28 @@ function loadButtons(msg){
 
 function editButtonClicked(obj){
 	console.log("Editing " + obj);
+	
+	$.ajax({
+		url: "http://localhost:8080/editpage",
+		type: 'POST',
+		contentType: 'applicatoin/json',
+		data:{
+			Id: obj
+		},
+		success: function(msg){
+			console.log(msg);
+			location.href = 'edit.html';
+		},
+		error: function(msg){
+			console.log("Error editing");
+		}
+		
+	});
+	
+}
+
+function getMyObj(){
+	return myObj;
 }
 
 function deleteButtonClicked(obj){
@@ -109,6 +133,29 @@ function deleteButtonClicked(obj){
 		success : function(msg) {
 			alert("Recipe Deleted!");
 			location.reload();
+		},
+		error : function() {
+			alert("AJAX Fail");
+		}
+
+	});
+}
+
+function editRecipeClicked(name, prep, img, descrip){
+	$.ajax({
+		url : "http://localhost:8080/updaterecipe",
+		type : 'PUT',
+		contentType : 'application/json',
+		data : {
+			recipe_name: name,
+			prep_time: prep,
+			image: img,
+			description: descrip
+		},
+		success : function(msg) {
+			alert("Recipe Edited!");
+			console.log(msg);
+			location.href = 'http://localhost:8080/admin.html';
 		},
 		error : function() {
 			alert("AJAX Fail");

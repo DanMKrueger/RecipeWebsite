@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+	var admin = prompt("Please enter the password.", "admin");
+	if(admin != "admin"){
+		window.stop();
+	}
+</script>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Recipe Website</title>
+        <link rel="icon" href="purpleFork.png">
+        
+    <link rel = "stylesheet" type = "text/css" href = "RecipeStyle.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1">  -->
+    <!--Bootstrap & JQuery import-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script src="RecipeScript.js"></script>
+
+    </head>
+
+    <body>
+        
+        <nav class="navbar inline navbar-expand-md bg-warning navbar-light navbarGradient">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="fork.png" alt="logo" style="width: 40px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="Index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="addrecipes.html">Add a Recipe!</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav ml-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="Login.html">Log In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="SignUp.html">Sign Up</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <h1 class="favoriteRecipeHeadding shadowing">Edit Recipe!</h1>
+        
+        <div class = "mx-4 row">
+        
+	        <form>
+	        
+			  <div class="form-group col-xs-3">
+			    <label for="RecipeInput2">Recipe Name</label>
+			    <input type="text" class="form-control" id="RecipeInput2" aria-describedby="emailHelp">
+			  </div>
+			  <div class="form-group col-xs-3">
+			    <label for="PrepTime">Prep Time</label>
+			    <input type="text" class="form-control" id="PrepTime">
+			  </div>
+			  <div class="form-group col-xs-3">
+			    <label for="Image">Image</label>
+			    <input type="text" class="form-control" id="Image">
+			  </div>
+			  <div class="form-group col-xs-3">
+			    <label for="Description">Description</label>
+			    <input type="text" class="form-control" id="Description">
+			  </div>
+	  		<button type="button" class="btn btn-primary" onclick="editRecipeClicked(RecipeInput2.value, PrepTime.value, Image.value, Description.value)">Submit</button>
+	  		
+			</form>
+			
+		</div>
+
+    </body>
+    
+        
+    <script>
+	
+		$("edit.html").ready(function() {
+			//console.log(getMyObj());
+			$.ajax({
+				url : "http://localhost:8080/editpageloaded",
+				type : 'POST',
+				contentType : 'application/json',
+				success : function(msg) {
+					
+					console.log(msg);
+					msg = msg.split(",");
+					
+					for(var i = 0; i < msg.length; i++){
+						msg[i] = msg[i].split("=")[1];
+					}
+					
+					document.getElementById('RecipeInput2').value = msg[1];
+					document.getElementById('PrepTime').value = msg[2];
+					document.getElementById('Image').value = msg[3];
+					var newDesc = msg[4].substr(0, msg[4].length-1);
+					document.getElementById('Description').value = newDesc;
+					//alert("Recipe Edited!");
+				},
+				error : function() {
+					alert("AJAX Fail");
+				}
+
+			});
+			
+		});
+		
+			
+	</script>
+    
+    	
+    	
+	<div id="footerID">
+		<p style="color:white; font-size:10px;">Posted by: Dan Krueger. Contact information: <a href="mailto:DMKrueger@yahoo.com"></a>.  Major design and general JavaScript help by Justynn Palmer</p>
+
+	</div>
+
+</html>

@@ -12,6 +12,9 @@ import com.collabera.recipe.repository.RecipeRepository;
 
 @Service
 public class RecipeService {
+	
+	public String editString = "";
+	public Integer tempInt = 0;
 
 	@Autowired
 	private RecipeRepository recipeRepo;
@@ -114,6 +117,84 @@ public class RecipeService {
 		recipeRepo.deleteById(Integer.parseInt(parsedIntString[1]));
 		allRecipes = (ArrayList<Recipe>) recipeRepo.findAll();
 		return allRecipes;
+	}
+
+
+	public String adminEdit(String enteredString) {
+		Recipe recipe = new Recipe();
+		String delim = "[=]";
+		String[] parsedIntString = enteredString.split(delim);
+		recipe = recipeRepo.getOne(Integer.parseInt(parsedIntString[1]));
+		tempInt = Integer.parseInt(parsedIntString[1]);
+		editString = recipe.toString();
+		return recipe.toString();
+	}
+
+
+	public String adminEditLoaded() {
+		return editString;
+	}
+
+
+	public String updateRecipe(String enteredString) {
+		System.out.println(enteredString);
+		
+		Recipe recipe = new Recipe();
+		
+		String delims = "[&]";
+		ArrayList<String> enteredRecipe = new ArrayList<>();
+		
+		/* 
+		 * Take our string that is passed in, and split the string up based on our
+		 * delimiter we set above, which is the & symbol
+		 */
+		String[] parsedString = enteredString.split(delims);
+		
+		
+		/* Go through our string array that has been split up into sections, and now
+		 * split it up on the = symbol so we take everything after the = and push it
+		 * into our array list.
+		 */
+		for (int i = 0; i < parsedString.length; i++) {
+			String str = parsedString[i].substring(parsedString[i].indexOf("=") + 1);
+			enteredRecipe.add(str);
+
+		}
+		
+		String newStringToAdd = enteredRecipe.get(0);
+		newStringToAdd = newStringToAdd.replace("%20", " ");
+		enteredRecipe.set(0, newStringToAdd);
+		
+		newStringToAdd = enteredRecipe.get(1);
+		newStringToAdd = newStringToAdd.replace("%20", " ");
+		enteredRecipe.set(1, newStringToAdd);
+		
+		newStringToAdd = enteredRecipe.get(3);
+		newStringToAdd = newStringToAdd.replace("%20", " ");
+		enteredRecipe.set(3, newStringToAdd);
+		
+		String decodeTest = enteredRecipe.get(2);
+		decodeTest = decode(decodeTest);
+		//System.out.println(decodeTest);
+		
+		//System.out.println(enteredRecipe.toString());
+		
+		enteredRecipe.set(2, decodeTest);
+		
+		recipe.setRecipe_name(enteredRecipe.get(0));
+		recipe.setPrepTime(enteredRecipe.get(1));
+		recipe.setImage(enteredRecipe.get(2));
+		recipe.setDescription(enteredRecipe.get(3));
+		recipe.setId(tempInt);
+		
+		System.out.println(recipe.toString());
+		
+		
+		recipeRepo.save(recipe);
+		
+		
+		
+		return "Updated!";
 	} 
 	
 }
