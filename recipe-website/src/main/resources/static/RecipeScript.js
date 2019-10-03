@@ -25,7 +25,7 @@ function loadImages(msg){
 		var overlayDiv = document.createElement("div");
 		overlayDiv.className="overlay";
 		var divClassForText = document.createElement("div");
-		divClassForText.innerHTML = msg[i].recipe_name + ": " + msg[i].description;
+		divClassForText.innerHTML = msg[i].recipe_name + " - Prep Time: " + msg[i].prep_time + ".    Description: " + msg[i].description;
 		divClassForText.className = "text";
 		
 		overlayDiv.appendChild(divClassForText);
