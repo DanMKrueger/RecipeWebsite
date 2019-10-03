@@ -1,0 +1,83 @@
+html, body{
+	height: 100%;
+}
+
+body{
+    background-image: url("https://image.freepik.com/free-photo/old-wooden-texture-background-vintage_55716-1138.jpg");
+    background-size: cover;
+    border-image-repeat: none;
+    overflow-x: hidden;
+}
+
+.favoriteRecipeHeadding{
+    font-size: 50px;
+    color: white;
+}
+
+#footerID{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-image: linear-gradient(black, grey);
+  color: white;
+  text-align: center;
+ }
+
+.shadowing {
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.navbarGradient {
+    background-image: linear-gradient(brown, grey);
+}
+
+.outlineDiv{
+	outline: 2px dashed blue;
+}
+
+#adminPageDiv{
+	height: 100%;
+}
+
+.dynamicDiv{
+	height: 35px;
+}
+
+.dynamicLabel{
+	color: purple;
+	font-size: 25px;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  background-image: linear-gradient(purple, grey);
+  overflow: hidden;
+  width: 330px;
+  height:0;
+  transition: .5s ease;
+}
+
+.img-divs:hover .overlay {
+  bottom: 0;
+  height: 100%;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
